@@ -9,6 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Spectral:ital,wght@0,400;0,500;0,600;1,500&family=Hanken+Grotesk:wght@400;500;600;700&family=Karla:wght@400;500;600;700&family=Caveat:wght@500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
   <link href="assets/home.css" rel="stylesheet" />
   <link href="assets/trip.css" rel="stylesheet" />
+  <link href="assets/journal.css" rel="stylesheet" />
 </head>
 <body>
   <div class="cbar">
@@ -39,17 +40,10 @@
       <div class="actions" id="actions"></div>
     </header>
 
-    <figure class="lead" id="lead" style="margin:0;">
-      <img id="leadImg" alt="" />
-    </figure>
-
-    <section>
-      <div class="gallery-head">
-        <h2>The photographs</h2>
-        <span class="count" id="gcount"></span>
+    <section class="journal-section">
+      <div id="journal">
+        <div id="jloading"><span class="spin"></span> Loading journal…</div>
       </div>
-      <div class="gloading" id="gloading"><span class="spin"></span> Gathering photographs…</div>
-      <div class="gallery" id="gallery"></div>
     </section>
 
     <nav class="tnav" id="tnav"></nav>
