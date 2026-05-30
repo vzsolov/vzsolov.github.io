@@ -1,0 +1,90 @@
+/* =========================================================================
+   VZsolov Trip Repo — journal prose styles
+   Scoped to .journal-prose — applies in both standalone journal pages
+   and when journal content is embedded in trip pages.
+   ========================================================================= */
+
+.journal-prose {
+  max-width: 72ch;
+  margin: 2rem auto 4rem;
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: var(--ink);
+}
+
+.journal-prose p {
+  margin: 0 0 1.25em;
+}
+
+.journal-prose h1 {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  font-weight: 600;
+  line-height: 1.2;
+  margin: 3rem 0 1.5rem;
+  color: var(--ink);
+}
+
+.journal-prose h2 {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 600;
+  margin: 2.5rem 0 1rem;
+  color: var(--ink);
+}
+
+.journal-prose h3 {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 2rem 0 0.75rem;
+}
+
+.journal-prose figure {
+  margin: 2.5rem 0;
+}
+
+.journal-prose figure img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+  display: block;
+  cursor: zoom-in;
+}
+
+.journal-prose img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+  display: block;
+  cursor: zoom-in;
+}
+
+.journal-prose a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.journal-prose a:hover { color: var(--accent-ink); }
+
+.journal-prose strong { font-weight: 600; }
+
+/* ---- journal loading spinner ---- */
+#jloading {
+  padding: 3rem 0;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* ---- journal section spacing ---- */
+.journal-section {
+  margin-top: 1rem;
+}
