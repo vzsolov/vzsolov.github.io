@@ -1,0 +1,148 @@
+/* =========================================================================
+   Trip detail / photo-gallery — Atlas-styled, builds on home.css tokens
+   ========================================================================= */
+
+.backlink {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: .14em;
+  text-transform: uppercase; text-decoration: none; color: var(--muted);
+  margin-right: auto; transition: color .25s var(--ease);
+}
+.backlink:hover { color: var(--accent-ink); }
+.backlink svg { width: 14px; height: 14px; }
+
+/* ---- breadcrumb ---- */
+.crumb {
+  font-family: var(--font-mono); font-size: 11.5px; letter-spacing: .18em;
+  text-transform: uppercase; color: var(--faint);
+  display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+}
+.crumb a { color: var(--faint); text-decoration: none; }
+.crumb a:hover { color: var(--accent-ink); }
+.crumb .sep { opacity: .5; }
+.crumb b { color: var(--accent-ink); font-weight: 400; }
+
+/* ---- trip hero ---- */
+.thero { padding: clamp(34px, 6vw, 60px) 0 clamp(26px, 4vw, 40px); position: relative; }
+.thero .top { display: flex; justify-content: space-between; align-items: baseline; gap: 20px; flex-wrap: wrap; }
+.thero .yearbig {
+  font-family: var(--font-display); font-weight: 500; line-height: .8;
+  font-size: clamp(3.4rem, 13vw, 8rem); letter-spacing: -.03em; color: var(--ink);
+  opacity: .12; font-variant-numeric: tabular-nums; pointer-events: none;
+  position: absolute; right: var(--gut); top: clamp(20px, 4vw, 44px);
+}
+.thero h1 {
+  font-family: var(--font-display); font-weight: 500; position: relative;
+  font-size: clamp(2.8rem, 9vw, 6rem); line-height: .98; letter-spacing: -.02em;
+  margin: 18px 0 0; text-wrap: balance;
+}
+[data-dir="editorial"] .thero h1 { font-weight: 600; }
+.thero .sub {
+  margin: 18px 0 0; display: flex; flex-wrap: wrap; gap: 10px 22px; align-items: center;
+  font-family: var(--font-mono); font-size: 12px; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--faint);
+}
+.thero .sub span { display: inline-flex; align-items: center; gap: 8px; }
+.thero .sub span::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); }
+.thero .actions { margin-top: 26px; display: flex; flex-wrap: wrap; gap: 12px; }
+.btn {
+  font-family: var(--font-mono); font-size: 11.5px; letter-spacing: .14em; text-transform: uppercase;
+  text-decoration: none; display: inline-flex; align-items: center; gap: 9px;
+  padding: 12px 20px; border-radius: 100px; border: 1px solid var(--line);
+  color: var(--ink); transition: all .25s var(--ease); cursor: pointer; background: none;
+}
+.btn:hover { border-color: var(--accent); color: var(--accent-ink); background: color-mix(in oklab, var(--accent) 8%, transparent); }
+.btn.primary { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.btn.primary:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+.btn svg { width: 15px; height: 15px; }
+
+/* ---- lead image ---- */
+.lead {
+  margin-top: clamp(22px, 4vw, 40px); border: 1px solid var(--line); border-radius: var(--radius);
+  overflow: hidden; background: var(--surface-2); aspect-ratio: 16/9; cursor: zoom-in; position: relative;
+}
+.lead img { width: 100%; height: 100%; object-fit: cover; transition: transform 1s var(--ease); }
+.lead:hover img { transform: scale(1.03); }
+@media (max-width: 600px) { .lead { aspect-ratio: 4/3; } }
+
+/* ---- gallery (masonry via CSS columns) ---- */
+.gallery-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin: clamp(40px,7vw,72px) 0 clamp(18px,3vw,28px); }
+.gallery-head h2 { font-family: var(--font-display); font-weight: 500; font-size: clamp(1.6rem,4vw,2.4rem); letter-spacing: -.02em; margin: 0; }
+.gallery-head .count { font-family: var(--font-mono); font-size: 11.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--faint); }
+
+.gallery { columns: 1; column-gap: clamp(12px, 2vw, 22px); }
+@media (min-width: 600px) { .gallery { columns: 2; } }
+@media (min-width: 1000px) { .gallery { columns: 3; } }
+.gallery figure {
+  margin: 0 0 clamp(12px, 2vw, 22px); break-inside: avoid;
+  border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden;
+  background: var(--surface-2); cursor: zoom-in; position: relative;
+  opacity: 0; transform: translateY(14px); transition: opacity .6s var(--ease), transform .6s var(--ease);
+}
+.gallery figure.in { opacity: 1; transform: none; }
+.gallery figure img { width: 100%; display: block; transition: transform .8s var(--ease); }
+.gallery figure:hover img { transform: scale(1.04); }
+.gallery figure .fno {
+  position: absolute; left: 10px; bottom: 10px; z-index: 2;
+  font-family: var(--font-mono); font-size: 10.5px; letter-spacing: .1em; color: #fff;
+  background: rgba(0,0,0,.45); padding: 3px 8px; border-radius: 3px; backdrop-filter: blur(4px);
+  opacity: 0; transition: opacity .25s;
+}
+.gallery figure:hover .fno { opacity: 1; }
+
+/* loading state */
+.gloading { display: flex; align-items: center; gap: 12px; padding: 30px 0; font-family: var(--font-mono); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--faint); }
+.gloading .spin { width: 16px; height: 16px; border: 2px solid var(--line); border-top-color: var(--accent); border-radius: 50%; animation: spin 1s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.gempty { padding: 40px 0; font-family: var(--font-mono); font-size: 12px; letter-spacing: .1em; color: var(--faint); }
+
+.gfallback {
+  border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface);
+  padding: clamp(28px, 5vw, 48px); text-align: center;
+  display: flex; flex-direction: column; align-items: center; gap: 20px;
+}
+.gfallback p { margin: 0; max-width: 38ch; font-size: 1.05rem; color: var(--muted); text-wrap: pretty; }
+.gfallback p b { color: var(--ink); font-weight: 600; }
+
+/* ---- prev / next trip ---- */
+.tnav { margin-top: clamp(50px, 8vw, 90px); border-top: 1px solid var(--line); display: grid; grid-template-columns: 1fr; }
+@media (min-width: 700px) { .tnav { grid-template-columns: 1fr 1fr; } }
+.tnav a {
+  display: flex; flex-direction: column; gap: 6px; padding: clamp(24px,4vw,38px) 0;
+  text-decoration: none; color: var(--ink); transition: color .25s var(--ease);
+}
+.tnav a.next { text-align: right; align-items: flex-end; border-top: 1px solid var(--line); }
+@media (min-width: 700px) { .tnav a.next { border-top: 0; border-left: 1px solid var(--line); padding-left: clamp(24px,4vw,38px); } .tnav a.prev { padding-right: clamp(24px,4vw,38px); } }
+.tnav a .dir { font-family: var(--font-mono); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--faint); }
+.tnav a .ttl { font-family: var(--font-display); font-size: clamp(1.4rem,3.5vw,2rem); letter-spacing: -.01em; }
+.tnav a:hover { color: var(--accent-ink); }
+.tnav a.disabled { opacity: .35; pointer-events: none; }
+
+/* ====================== LIGHTBOX ====================== */
+.lbox {
+  position: fixed; inset: 0; z-index: 200; display: none;
+  background: rgba(8,6,4,.94); backdrop-filter: blur(6px);
+  align-items: center; justify-content: center;
+}
+.lbox.open { display: flex; }
+.lbox img { max-width: 92vw; max-height: 82vh; object-fit: contain; border-radius: 2px; box-shadow: 0 30px 80px rgba(0,0,0,.6); }
+.lbox .lb-counter {
+  position: absolute; top: 22px; left: 0; right: 0; text-align: center;
+  font-family: var(--font-mono); font-size: 12px; letter-spacing: .2em; color: #e8ddcb;
+}
+.lbox .lb-close {
+  position: absolute; top: 16px; right: 18px; width: 44px; height: 44px;
+  display: grid; place-items: center; background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.18); border-radius: 50%; color: #fff; cursor: pointer;
+}
+.lbox .lb-close:hover { background: rgba(255,255,255,.16); }
+.lbox .lb-nav {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 52px; height: 52px; display: grid; place-items: center;
+  background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.18);
+  border-radius: 50%; color: #fff; cursor: pointer; transition: background .2s;
+}
+.lbox .lb-nav:hover { background: rgba(255,255,255,.18); }
+.lbox .lb-prev { left: 16px; } .lbox .lb-next { right: 16px; }
+.lbox .lb-nav svg, .lbox .lb-close svg { width: 20px; height: 20px; }
+@media (max-width: 600px) { .lbox .lb-nav { width: 42px; height: 42px; bottom: 18px; top: auto; transform: none; } .lbox .lb-prev { left: 22px; } .lbox .lb-next { right: 22px; } .lbox img { max-height: 74vh; } }
