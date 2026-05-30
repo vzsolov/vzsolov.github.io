@@ -114,7 +114,7 @@ def convert_file(path: Path) -> None:
     content = body.decode_contents().strip()
 
     output = f"""<!DOCTYPE html>
-<html lang="en" data-dir="atlas" data-theme="light">
+<html lang="he" data-dir="atlas" data-theme="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
@@ -128,7 +128,7 @@ def convert_file(path: Path) -> None:
 <body>
 {CBAR}
   <main class="wrap">
-    <article class="journal-prose">
+    <article class="journal-prose" dir="rtl">
 {content}
     </article>
   </main>

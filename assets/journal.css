@@ -11,6 +11,8 @@
   font-size: 1.05rem;
   line-height: 1.75;
   color: var(--ink);
+  direction: rtl;
+  text-align: right;
 }
 
 .journal-prose p {
