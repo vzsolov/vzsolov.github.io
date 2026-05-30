@@ -1,6 +1,6 @@
 /* =========================================================================
-   Trip detail / gallery logic
-   URL:  czechia24.html  (window.TRIP_ID = "czechia24" set before this script)
+   Trip detail / journal logic
+   URL: czechia24.html  (window.TRIP_ID = "czechia24" set before this script)
    ========================================================================= */
 const PLAY = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>';
 const GRID = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>';
@@ -44,79 +44,48 @@ const GRID = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-
 
   const filmBtns = trip.links.map(l =>
     `<a class="btn primary" href="${l.url}" target="_blank" rel="noopener">${PLAY} Watch ${l.label}</a>`).join("");
-  const journalBtn = trip.journal
-    ? `<a class="btn primary" href="${trip.journal}" target="_blank" rel="noopener">${GRID} Open full journal</a>`
-    : "";
-  $("#actions").innerHTML = filmBtns + journalBtn +
+  $("#actions").innerHTML = filmBtns +
     `<a class="btn" href="index.html">${GRID} All trips</a>`;
 
-  /* ---- lead image ---- */
-  const leadUrl = BASE + trip.img;
-  const leadImg = $("#leadImg");
-  leadImg.src = leadUrl;
-  leadImg.alt = `${trip.title} ${trip.year}`;
+  /* ---- shots: shared between loadJournal and lightbox ---- */
+  const shots = [];
 
-  /* ---- gallery auto-discovery ---- */
-  const base = leadUrl.replace(/[^/]+$/, "");          // …/images/
-  const gallery = $("#gallery");
-  const loading = $("#gloading");
-  const shots = [leadUrl];                              // lightbox list (lead first)
-  $("#lead").addEventListener("click", () => openLB(0));
-
-  const nm = (i, pad) => "image" + String(i).padStart(pad, "0");
-  const test = url => new Promise(res => { const im = new Image(); im.onload = () => res(true); im.onerror = () => res(false); im.src = url; });
-
-  function addFigure(n, url) {
-    if (url === leadUrl) return;                        // skip duplicate of lead
-    const i = shots.length; shots.push(url);
-    const fig = el("figure");
-    fig.innerHTML = `<span class="fno">${String(n).padStart(2, "0")}</span>`;
-    const im = el("img"); im.loading = "lazy"; im.src = url; im.alt = `${trip.title} ${trip.year} — ${n}`;
-    im.addEventListener("load", () => requestAnimationFrame(() => fig.classList.add("in")));
-    fig.appendChild(im);
-    fig.addEventListener("click", () => openLB(i));
-    gallery.appendChild(fig);
-  }
-
-  (async function discover() {
-    const MAX = 120, STOP = 6;
-    let pad = null, ext = null, start = 0;
-    // find the first existing file + lock the naming scheme
-    outer:
-    for (let i = 0; i <= 4; i++)
-      for (const p of [1, 2, 3])
-        for (const e of [".jpg", ".JPG", ".jpeg", ".png"]) {
-          if (await test(base + nm(i, p) + e)) { pad = p; ext = e; start = i; break outer; }
+  /* ---- load journal ---- */
+  (async function loadJournal() {
+    const jEl = $("#journal");
+    const loadEl = $("#jloading");
+    if (!trip.journal || !jEl) return;
+    try {
+      const res = await fetch(trip.journal);
+      if (!res.ok) throw new Error(res.status);
+      const raw = await res.text();
+      const doc = new DOMParser().parseFromString(raw, "text/html");
+      const base = trip.journal.replace(/[^/]+$/, "");
+      doc.querySelectorAll("img").forEach(img => {
+        const src = img.getAttribute("src") || "";
+        if (src && !src.startsWith("http") && !src.startsWith("/")) {
+          img.setAttribute("src", base + src);
         }
-    if (pad === null) { loading.remove(); fallback(); return; }
-
-    addFigure(start, base + nm(start, pad) + ext);
-    let miss = 0;
-    for (let i = start + 1; i <= start + MAX; i++) {
-      const url = base + nm(i, pad) + ext;
-      if (await test(url)) { addFigure(i, url); miss = 0; }
-      else { if (++miss >= STOP) break; }
-    }
-    loading.remove();
-    if (shots.length > 1) $("#gcount").textContent = `${shots.length} photographs`;
-    else fallback();
-
-    function fallback() {
-      $("#gcount").textContent = trip.journal ? "On the journal page" : "No photographs found";
-      if (!trip.journal) return;
-      const box = el("div", "gfallback");
-      box.innerHTML =
-        `<p>The full photo set for <b>${trip.title} ${trip.year}</b> lives on the original journal page.</p>` +
-        `<a class="btn primary" href="${trip.journal}" target="_blank" rel="noopener">${GRID} Open full journal ↗</a>`;
-      gallery.after(box);
+      });
+      const wrapper = document.createElement("div");
+      wrapper.className = "journal-prose";
+      wrapper.innerHTML = doc.body.innerHTML;
+      if (loadEl) loadEl.remove();
+      jEl.appendChild(wrapper);
+      const imgs = [...wrapper.querySelectorAll("img")];
+      shots.length = 0;
+      imgs.forEach(img => shots.push(img.src));
+      imgs.forEach((img, i) => img.addEventListener("click", () => openLB(i)));
+    } catch (e) {
+      if (loadEl) loadEl.textContent = "Journal unavailable.";
     }
   })();
 
   /* ---- prev / next trip ---- */
-  const later = TRIPS[idx - 1];   // newer
-  const earlier = TRIPS[idx + 1]; // older
+  const later = TRIPS[idx - 1];
+  const earlier = TRIPS[idx + 1];
   const navHTML = (t, dir, cls) => t
-    ? `<a class="${cls}" href="${t.page}"><span class="dir">${dir}</span><span class="ttl">${t.title}&nbsp;’${String(t.year).slice(2)}</span></a>`
+    ? `<a class="${cls}" href="${t.page}"><span class="dir">${dir}</span><span class="ttl">${t.title}&nbsp;'${String(t.year).slice(2)}</span></a>`
     : `<span class="${cls} disabled"><span class="dir">${dir}</span><span class="ttl">—</span></span>`;
   $("#tnav").innerHTML = navHTML(earlier, "← Earlier trip", "prev") + navHTML(later, "Later trip →", "next");
 
