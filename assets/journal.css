@@ -63,6 +63,10 @@
   cursor: zoom-in;
 }
 
+.journal-prose img + img {
+  margin-top: 1.5rem;
+}
+
 .journal-prose a {
   color: var(--accent);
   text-decoration: underline;
