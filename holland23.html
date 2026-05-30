@@ -1,63 +1,81 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en" data-dir="atlas" data-theme="light">
 <head>
-	<meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Simple House - About Page</title>
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet" />
-    <link href="css/all.min.css" rel="stylesheet" />
-	<link href="css/templatemo-style.css" rel="stylesheet" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Holland 2023 · VZsolov Trip Repo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Spectral:ital,wght@0,400;0,500;0,600;1,500&family=Hanken+Grotesk:wght@400;500;600;700&family=Karla:wght@400;500;600;700&family=Caveat:wght@500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <link href="assets/home.css" rel="stylesheet" />
+  <link href="assets/trip.css" rel="stylesheet" />
 </head>
-<!--
+<body>
+  <div class="cbar">
+    <a class="backlink" href="index.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 19l-7-7 7-7"></path></svg>
+      The Archive
+    </a>
+    <span class="seg-label">Style</span>
+    <div class="seg" role="group" aria-label="Visual direction">
+      <button data-dir-btn="atlas" aria-pressed="true">Atlas</button>
+      <button data-dir-btn="journal" aria-pressed="false">Journal</button>
+      <button data-dir-btn="editorial" aria-pressed="false">Editorial</button>
+    </div>
+    <button class="iconbtn" id="themeBtn" title="Toggle light / dark" aria-label="Toggle light or dark theme">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="4.2"></circle>
+        <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.2 5.2l1.4 1.4M17.4 17.4l1.4 1.4M18.8 5.2l-1.4 1.4M6.6 17.4l-1.4 1.4"></path>
+      </svg>
+    </button>
+  </div>
 
-Simple House
+  <main class="wrap">
+    <header class="thero">
+      <div class="yearbig" id="yearbig"></div>
+      <p class="crumb" id="crumb"></p>
+      <h1 id="title"></h1>
+      <div class="sub" id="sub"></div>
+      <div class="actions" id="actions"></div>
+    </header>
 
-https://templatemo.com/tm-539-simple-house
+    <figure class="lead" id="lead" style="margin:0;">
+      <img id="leadImg" alt="" />
+    </figure>
 
--->
-<body> 
+    <section>
+      <div class="gallery-head">
+        <h2>The photographs</h2>
+        <span class="count" id="gcount"></span>
+      </div>
+      <div class="gloading" id="gloading"><span class="spin"></span> Gathering photographs…</div>
+      <div class="gallery" id="gallery"></div>
+    </section>
 
-	<div class="container">
-	<!-- Top box -->
-		<!-- Logo & Site Name -->
-		<div class="placeholder">
-			<div class="parallax-window" data-parallax="scroll" data-image-src="img/simple-house-01.jpg">
-				<div class="tm-header">
-					<div class="row tm-header-inner">
-						<div class="col-md-6 col-12">
-							<img src="img/simple-house-logo.png" alt="Logo" class="tm-site-logo" /> 
-							<div class="tm-site-text-box">
-								<h1 class="tm-site-title">VZSOLOV Trips Repo</h1>
-								<h6 class="tm-site-description">our trips</h6>	
-							</div>
-						</div>
-						<nav class="col-md-6 col-12 tm-nav">
-							<ul class="tm-nav-ul">
-								<li class="tm-nav-li"><a href="index.html" class="tm-nav-link">Home</a></li>
-								<li class="tm-nav-li"><a href="about.html" class="tm-nav-link active">About</a></li>
-							</ul>
-						</nav>	
-					</div>
-				</div>
-			</div>
-		</div>
+    <nav class="tnav" id="tnav"></nav>
+  </main>
 
-		<main>
-		
-			<div align="center">
-			<iframe src="2023/holland/holland23.html" height="1000" width="100%" style="width:100%; height:1000; border:none; margin:0; padding:0; overflow:hidden; z-index:999999;" ></iframe> 
-			</div>
-		</main>
+  <footer class="foot">
+    <div class="wrap">
+      <h2>Back to the <em>whole</em> archive.</h2>
+      <div class="links">
+        <a href="index.html">All trips</a>
+        <a href="about.html">About</a>
+        <a href="https://vimeo.com/vzsolov" target="_blank" rel="noopener">Vimeo</a>
+      </div>
+    </div>
+  </footer>
 
-		<footer class="tm-footer text-center">
-			<p>Copyright &copy; 2020 Simple House 
-            
-            | Design: <a rel="nofollow" href="https://templatemo.com">TemplateMo</a></p>
-		</footer>
-	</div>
-	<script src="js/jquery.min.js"></script>
-	<script src="js/parallax.min.js"></script>
+  <div class="lbox" id="lbox" aria-hidden="true">
+    <div class="lb-counter" id="lbCount"></div>
+    <button class="lb-close" id="lbClose" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+    <button class="lb-nav lb-prev" id="lbPrev" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 19l-7-7 7-7"></path></svg></button>
+    <img id="lbImg" alt="" />
+    <button class="lb-nav lb-next" id="lbNext" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"></path></svg></button>
+  </div>
+
+  <script>window.TRIP_ID = "holland23";</script>
+  <script src="assets/trips.js"></script>
+  <script src="assets/trip.js"></script>
 </body>
 </html>
