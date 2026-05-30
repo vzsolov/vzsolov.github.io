@@ -102,11 +102,12 @@ const GRID = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-
     else fallback();
 
     function fallback() {
-      $("#gcount").textContent = "On the journal page";
+      $("#gcount").textContent = trip.journal ? "On the journal page" : "No photographs found";
+      if (!trip.journal) return;
       const box = el("div", "gfallback");
       box.innerHTML =
         `<p>The full photo set for <b>${trip.title} ${trip.year}</b> lives on the original journal page.</p>` +
-        `<a class="btn primary" href="${BASE + trip.page}" target="_blank" rel="noopener">${GRID} Open full gallery ↗</a>`;
+        `<a class="btn primary" href="${trip.journal}" target="_blank" rel="noopener">${GRID} Open full journal ↗</a>`;
       gallery.after(box);
     }
   })();
