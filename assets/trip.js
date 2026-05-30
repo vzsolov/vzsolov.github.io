@@ -8,19 +8,14 @@ const GRID = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-
 (function () {
   const root = document.documentElement;
   const $ = (s, c = document) => c.querySelector(s);
-  const el = (t, cls, html) => { const e = document.createElement(t); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; };
 
-  /* ---- persisted direction + theme (shared with Home) ---- */
+  /* ---- persisted theme ---- */
   const store = {
-    get dir() { return localStorage.getItem("vz-dir") || "atlas"; },
-    set dir(v) { localStorage.setItem("vz-dir", v); },
     get theme() { return localStorage.getItem("vz-theme") || "light"; },
     set theme(v) { localStorage.setItem("vz-theme", v); },
   };
-  const applyDir = v => { root.setAttribute("data-dir", v); document.querySelectorAll("[data-dir-btn]").forEach(b => b.setAttribute("aria-pressed", b.dataset.dirBtn === v)); store.dir = v; };
   const applyTheme = v => { root.setAttribute("data-theme", v); store.theme = v; };
-  applyDir(store.dir); applyTheme(store.theme);
-  document.querySelectorAll("[data-dir-btn]").forEach(b => b.addEventListener("click", () => applyDir(b.dataset.dirBtn)));
+  applyTheme(store.theme);
   const tBtn = $("#themeBtn");
   if (tBtn) tBtn.addEventListener("click", () => applyTheme(root.getAttribute("data-theme") === "dark" ? "light" : "dark"));
 

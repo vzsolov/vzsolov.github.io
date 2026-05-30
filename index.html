@@ -7,19 +7,16 @@
   <meta name="description" content="A travel photo-journal — trips logged across Europe and beyond, 2012 to today." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Spectral:ital,wght@0,400;0,500;0,600;1,500&family=Hanken+Grotesk:wght@400;500;600;700&family=Karla:wght@400;500;600;700&family=Caveat:wght@500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,500&family=Hanken+Grotesk:wght@400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
   <link href="assets/home.css" rel="stylesheet" />
 </head>
 <body>
+
   <!-- ============ CONTROL BAR ============ -->
   <div class="cbar">
     <div class="brand">VZsolov <b class="brand-rest">Trip Repo</b></div>
-    <span class="seg-label">Style</span>
-    <div class="seg" role="group" aria-label="Visual direction">
-      <button data-dir-btn="atlas" aria-pressed="true">Atlas</button>
-      <button data-dir-btn="journal" aria-pressed="false">Journal</button>
-      <button data-dir-btn="editorial" aria-pressed="false">Editorial</button>
-    </div>
+    <span class="seg-label">An atlas of every journey</span>
     <button class="iconbtn" id="themeBtn" title="Toggle light / dark" aria-label="Toggle light or dark theme">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
         <circle cx="12" cy="12" r="4.2"></circle>
@@ -28,57 +25,38 @@
     </button>
   </div>
 
-  <!-- ============ HERO ============ -->
-  <header class="hero">
-    <div class="wrap">
-      <div class="hero-kicker">
-        <p class="eyebrow">A travel photo-journal</p>
-        <span class="rule"></span>
-      </div>
-      <h1>Roads taken,<br /><em>kept in pictures.</em></h1>
-      <p class="lede">Every trip we've made — fjords and deserts, alpine passes and island light — gathered year by year, with films and full photo journals for each.</p>
-      <div class="hero-meta">
-        <span>Europe &amp; beyond</span>
-        <span>2012 — present</span>
-        <span>Stills &amp; films</span>
-      </div>
-      <div class="stats" id="stats"></div>
-    </div>
-  </header>
-
   <main class="wrap">
-    <!-- ============ MAP ============ -->
-    <section>
+
+    <!-- ============ COLLAGE: MAP IN THE CENTRE, TRIPS AROUND IT ============ -->
+    <section class="archive">
       <div class="section-head">
         <div>
-          <p class="eyebrow">Where we've been</p>
-          <h2>The map so far</h2>
+          <p class="eyebrow">The whole atlas</p>
+          <h2>Roads taken,<br /><em>kept in pictures.</em></h2>
         </div>
-        <p class="note">Pins mark every country logged below</p>
+        <p class="note">Tap a marker or a place to filter the mosaic</p>
       </div>
-      <div class="map" id="map">
-        <div class="graticule"></div>
-        <svg class="compass" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.3">
-          <circle cx="24" cy="24" r="21"></circle>
-          <path d="M24 6 L28 24 L24 42 L20 24 Z" fill="currentColor" stroke="none" opacity=".5"></path>
-          <path d="M6 24 L24 20 L42 24 L24 28 Z" fill="currentColor" stroke="none" opacity=".25"></path>
-          <text x="24" y="13" text-anchor="middle" font-size="7" fill="currentColor" stroke="none" font-family="monospace">N</text>
-        </svg>
-        <span class="placeholder-tag">[ interactive map — Leaflet drops in here ]</span>
+
+      <div class="filterbar">
+        <div class="chips" id="filters"></div>
+        <span class="resultcount" id="resultcount"></span>
       </div>
+
+      <div class="collage" id="collage">
+        <div class="map" id="map">
+          <svg class="compass" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.3">
+            <circle cx="24" cy="24" r="21"></circle>
+            <path d="M24 6 L28 24 L24 42 L20 24 Z" fill="currentColor" stroke="none" opacity=".5"></path>
+            <path d="M6 24 L24 20 L42 24 L24 28 Z" fill="currentColor" stroke="none" opacity=".25"></path>
+            <text x="24" y="13" text-anchor="middle" font-size="7" fill="currentColor" stroke="none" font-family="monospace">N</text>
+          </svg>
+          <div class="coordreadout" id="coordreadout">—° · —°</div>
+        </div>
+        <!-- trip tiles injected by home.js -->
+      </div>
+      <p class="noresults" id="noresults" hidden>No trips logged here yet.</p>
     </section>
 
-    <!-- ============ TIMELINE ============ -->
-    <section class="timeline">
-      <div class="section-head">
-        <div>
-          <p class="eyebrow">The archive</p>
-          <h2>Year by year</h2>
-        </div>
-        <p class="note">Newest first · scroll to travel back</p>
-      </div>
-      <div id="timeline"></div>
-    </section>
   </main>
 
   <!-- ============ FOOTER ============ -->
@@ -93,12 +71,14 @@
       </div>
     </div>
     <div class="wrap" style="margin-top:26px;">
-      <p class="fine">© <span id="yr"></span> VZsolov Trip Repo</p>
+      <p class="fine">© <span id="yr"></span> VZsolov Trip Repo · redesigned travel archive</p>
     </div>
   </footer>
 
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   <script src="assets/trips.js"></script>
   <script src="assets/home.js"></script>
   <script>document.getElementById("yr").textContent = new Date().getFullYear();</script>
+
 </body>
 </html>
