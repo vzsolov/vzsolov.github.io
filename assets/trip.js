@@ -1,6 +1,6 @@
 /* =========================================================================
    Trip detail / gallery logic
-   URL:  Trip.html?id=czechia24   (id = page slug, without .html)
+   URL:  czechia24.html  (window.TRIP_ID = "czechia24" set before this script)
    ========================================================================= */
 const PLAY = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>';
 const GRID = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>';
@@ -25,7 +25,7 @@ const GRID = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-
   if (tBtn) tBtn.addEventListener("click", () => applyTheme(root.getAttribute("data-theme") === "dark" ? "light" : "dark"));
 
   /* ---- resolve trip ---- */
-  const slug = (new URLSearchParams(location.search).get("id") || "").replace(/\.html$/, "");
+  const slug = (window.TRIP_ID || new URLSearchParams(location.search).get("id") || "").replace(/\.html$/, "");
   const idx = Math.max(0, TRIPS.findIndex(t => t.page.replace(/\.html$/, "") === slug));
   const trip = TRIPS[idx];
   const place = PLACES.find(p => p.country === trip.country);
@@ -36,7 +36,7 @@ const GRID = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-
     : "";
 
   /* ---- hero ---- */
-  $("#crumb").innerHTML = `<a href="Home.html">Archive</a><span class="sep">/</span><a href="Home.html#${trip.year}">${trip.year}</a><span class="sep">/</span><b>${trip.title}</b>`;
+  $("#crumb").innerHTML = `<a href="index.html">Archive</a><span class="sep">/</span><a href="index.html#y${trip.year}">${trip.year}</a><span class="sep">/</span><b>${trip.title}</b>`;
   $("#yearbig").textContent = trip.year;
   $("#title").textContent = trip.title;
   const subBits = [trip.country, trip.region, coord].filter(Boolean).map(s => `<span>${s}</span>`).join("");
@@ -44,8 +44,11 @@ const GRID = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-
 
   const filmBtns = trip.links.map(l =>
     `<a class="btn primary" href="${l.url}" target="_blank" rel="noopener">${PLAY} Watch ${l.label}</a>`).join("");
-  $("#actions").innerHTML = filmBtns +
-    `<a class="btn" href="Home.html">${GRID} All trips</a>`;
+  const journalBtn = trip.journal
+    ? `<a class="btn primary" href="${trip.journal}" target="_blank" rel="noopener">${GRID} Open full journal</a>`
+    : "";
+  $("#actions").innerHTML = filmBtns + journalBtn +
+    `<a class="btn" href="index.html">${GRID} All trips</a>`;
 
   /* ---- lead image ---- */
   const leadUrl = BASE + trip.img;
@@ -112,7 +115,7 @@ const GRID = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-
   const later = TRIPS[idx - 1];   // newer
   const earlier = TRIPS[idx + 1]; // older
   const navHTML = (t, dir, cls) => t
-    ? `<a class="${cls}" href="Trip.html?id=${t.page.replace(/\.html$/, "")}"><span class="dir">${dir}</span><span class="ttl">${t.title}&nbsp;’${String(t.year).slice(2)}</span></a>`
+    ? `<a class="${cls}" href="${t.page}"><span class="dir">${dir}</span><span class="ttl">${t.title}&nbsp;’${String(t.year).slice(2)}</span></a>`
     : `<span class="${cls} disabled"><span class="dir">${dir}</span><span class="ttl">—</span></span>`;
   $("#tnav").innerHTML = navHTML(earlier, "← Earlier trip", "prev") + navHTML(later, "Later trip →", "next");
 
