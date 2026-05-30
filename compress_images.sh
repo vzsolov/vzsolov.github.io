@@ -4,9 +4,10 @@
 # images are never touched again unless they change (e.g. replaced with a new photo).
 #
 # Usage:
-#   ./compress_images.sh              # compress all new images
-#   ./compress_images.sh --dry-run    # show what would be compressed, no changes
-#   ./compress_images.sh --quality=75 # override quality (default: 80)
+#   ./compress_images.sh 2025/italy      # compress images in a specific folder
+#   ./compress_images.sh 2025/           # compress all of a year folder
+#   ./compress_images.sh --dry-run 2025/italy
+#   ./compress_images.sh --quality=75 2025/italy
 
 set -euo pipefail
 
@@ -14,14 +15,30 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 LOG_FILE="$SCRIPT_DIR/.compressed_images.log"
 QUALITY=80
 DRY_RUN=false
+TARGET_DIR=""
 
 for arg in "$@"; do
   case "$arg" in
     --dry-run)      DRY_RUN=true ;;
     --quality=*)    QUALITY="${arg#*=}" ;;
-    *) echo "Unknown option: $arg" >&2; exit 1 ;;
+    --*)            echo "Unknown option: $arg" >&2; exit 1 ;;
+    *)              TARGET_DIR="$arg" ;;
   esac
 done
+
+if [[ -z "$TARGET_DIR" ]]; then
+  echo "Usage: $0 <folder> [--dry-run] [--quality=N]" >&2
+  echo "  <folder>  path to compress (e.g. 2025/italy or 2025/)" >&2
+  exit 1
+fi
+
+# Resolve to absolute path and verify it exists inside the repo
+TARGET_ABS="$(cd "$SCRIPT_DIR" && cd "$TARGET_DIR" 2>/dev/null && pwd)" || {
+  echo "Error: folder not found: $TARGET_DIR" >&2; exit 1
+}
+if [[ "$TARGET_ABS" != "$SCRIPT_DIR"* ]]; then
+  echo "Error: folder must be inside the repo: $TARGET_DIR" >&2; exit 1
+fi
 
 if ! command -v jpegoptim &>/dev/null; then
   echo "Error: jpegoptim not found. Install with: sudo apt install jpegoptim" >&2
@@ -70,7 +87,7 @@ while IFS= read -r -d '' img; do
     echo "ERROR: jpegoptim failed on $img" >&2
     (( errors++ )) || true
   fi
-done < <(find "$SCRIPT_DIR" -type f \( -name "*.jpg" -o -name "*.jpeg" \) -not -path "*/.git/*" -print0)
+done < <(find "$TARGET_ABS" -type f \( -name "*.jpg" -o -name "*.jpeg" \) -print0)
 
 # Write updated log (only when not a dry-run)
 if [[ "$DRY_RUN" == false ]]; then
