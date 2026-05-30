@@ -52,15 +52,15 @@
   if (tl) YEARS.forEach(year => {
     const trips = TRIPS.filter(t => t.year === year);
     const row = el("article", "year-row reveal");
+    row.id = `y${year}`;
     const head = el("div", "year-head");
     head.innerHTML = `<div class="y">${year}</div><div class="y-meta">${trips.length} trip${trips.length > 1 ? "s" : ""}</div>`;
     const grid = el("div", "grid");
     trips.forEach(t => {
       const card = el("article", "card");
-      const slug = t.page.replace(/\.html$/, "");
       const links = t.links.map(l => `<a href="${l.url}" target="_blank" rel="noopener">${l.label}</a>`).join("");
       card.innerHTML = `
-        <a class="cover" href="Trip.html?id=${slug}">
+        <a class="cover" href="${t.page}">
           <img class="ph" loading="lazy" src="${BASE + t.img}" alt="${t.title} ${t.year}"
                onerror="this.style.opacity=0;this.parentElement.classList.add('noimg')" />
         </a>
@@ -69,7 +69,7 @@
           <h3>${t.title}</h3>
         </div>
         <div class="links">
-          <a class="blog" href="Trip.html?id=${slug}">Photo Journal</a>
+          <a class="blog" href="${t.page}">Photo Journal</a>
           ${links}
         </div>`;
       grid.appendChild(card);
