@@ -1,467 +1,104 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en" data-dir="atlas" data-theme="light">
 <head>
-	<meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>VZSOLOV Travel Repo</title>
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400" rel="stylesheet" />
-	<link href="css/templatemo-style.css" rel="stylesheet" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>VZsolov Trip Repo</title>
+  <meta name="description" content="A travel photo-journal — trips logged across Europe and beyond, 2012 to today." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Spectral:ital,wght@0,400;0,500;0,600;1,500&family=Hanken+Grotesk:wght@400;500;600;700&family=Karla:wght@400;500;600;700&family=Caveat:wght@500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <link href="assets/home.css" rel="stylesheet" />
 </head>
-<!--
-
-Simple House
-
-https://templatemo.com/tm-539-simple-house
-
--->
 <body>
+  <!-- ============ CONTROL BAR ============ -->
+  <div class="cbar">
+    <div class="brand">VZsolov <b class="brand-rest">Trip Repo</b></div>
+    <span class="seg-label">Style</span>
+    <div class="seg" role="group" aria-label="Visual direction">
+      <button data-dir-btn="atlas" aria-pressed="true">Atlas</button>
+      <button data-dir-btn="journal" aria-pressed="false">Journal</button>
+      <button data-dir-btn="editorial" aria-pressed="false">Editorial</button>
+    </div>
+    <button class="iconbtn" id="themeBtn" title="Toggle light / dark" aria-label="Toggle light or dark theme">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="4.2"></circle>
+        <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.2 5.2l1.4 1.4M17.4 17.4l1.4 1.4M18.8 5.2l-1.4 1.4M6.6 17.4l-1.4 1.4"></path>
+      </svg>
+    </button>
+  </div>
 
-	<div class="container">
-	<!-- Top box -->
-		<!-- Logo & Site Name -->
-		<div class="placeholder">
-			<div class="parallax-window" data-parallax="scroll" data-image-src="img/simple-house-01.jpg">
-				<div class="tm-header">
-					<div class="row tm-header-inner">
-						<div class="col-md-6 col-12">
-							<img src="img/simple-house-logo.png" alt="Logo" class="tm-site-logo" />
-							<div class="tm-site-text-box">
-								<h1 class="tm-site-title">VZSOLOV Trips Repo</h1>
-								<h6 class="tm-site-description">our trips</h6>
-							</div>
-						</div>
-						<nav class="col-md-6 col-12 tm-nav">
-							<ul class="tm-nav-ul">
-								<li class="tm-nav-li"><a href="index.html" class="tm-nav-link active">Home</a></li>
-								<li class="tm-nav-li"><a href="about.html" class="tm-nav-link">About</a></li>
-							</ul>
-						</nav>
-					</div>
-				</div>
-			</div>
-		</div>
+  <!-- ============ HERO ============ -->
+  <header class="hero">
+    <div class="wrap">
+      <div class="hero-kicker">
+        <p class="eyebrow">A travel photo-journal</p>
+        <span class="rule"></span>
+      </div>
+      <h1>Roads taken,<br /><em>kept in pictures.</em></h1>
+      <p class="lede">Every trip we've made — fjords and deserts, alpine passes and island light — gathered year by year, with films and full photo journals for each.</p>
+      <div class="hero-meta">
+        <span>Europe &amp; beyond</span>
+        <span>2012 — present</span>
+        <span>Stills &amp; films</span>
+      </div>
+      <div class="stats" id="stats"></div>
+    </div>
+  </header>
 
-		<main>
-			<header class="row tm-welcome-section">
-				<h2 class="col-12 text-center tm-section-title">Welcome to our Tavel Repo</h2>
-				<p class="col-12 text-center">Go to "Home Page" to see all events OR filter by years:</p>
-			</header>
+  <main class="wrap">
+    <!-- ============ MAP ============ -->
+    <section>
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Where we've been</p>
+          <h2>The map so far</h2>
+        </div>
+        <p class="note">Pins mark every country logged below</p>
+      </div>
+      <div class="map" id="map">
+        <div class="graticule"></div>
+        <svg class="compass" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.3">
+          <circle cx="24" cy="24" r="21"></circle>
+          <path d="M24 6 L28 24 L24 42 L20 24 Z" fill="currentColor" stroke="none" opacity=".5"></path>
+          <path d="M6 24 L24 20 L42 24 L24 28 Z" fill="currentColor" stroke="none" opacity=".25"></path>
+          <text x="24" y="13" text-anchor="middle" font-size="7" fill="currentColor" stroke="none" font-family="monospace">N</text>
+        </svg>
+        <span class="placeholder-tag">[ interactive map — Leaflet drops in here ]</span>
+      </div>
+    </section>
 
-			<div class="tm-paging-links">
-				<nav>
-					<ul>
-						<li class="tm-paging-item"><a href="#" class="tm-paging-link">2024</a></li>
-						<li class="tm-paging-item"><a href="#" class="tm-paging-link">2023</a></li>
-						<li class="tm-paging-item"><a href="#" class="tm-paging-link">2022</a></li>
-						<li class="tm-paging-item"><a href="#" class="tm-paging-link">2020</a></li>
-						<li class="tm-paging-item"><a href="#" class="tm-paging-link">2019</a></li>
-						<li class="tm-paging-item"><a href="#" class="tm-paging-link">2018</a></li>
-						<li class="tm-paging-item"><a href="#" class="tm-paging-link">2017</a></li>
-						<li class="tm-paging-item"><a href="#" class="tm-paging-link">2016</a></li>
-						<li class="tm-paging-item"><a href="#" class="tm-paging-link">2015</a></li>
-						<li class="tm-paging-item"><a href="#" class="tm-paging-link">2014</a></li>
-						<li class="tm-paging-item"><a href="#" class="tm-paging-link">2013</a></li>
-						<li class="tm-paging-item"><a href="#" class="tm-paging-link">2012</a></li>
+    <!-- ============ TIMELINE ============ -->
+    <section class="timeline">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">The archive</p>
+          <h2>Year by year</h2>
+        </div>
+        <p class="note">Newest first · scroll to travel back</p>
+      </div>
+      <div id="timeline"></div>
+    </section>
+  </main>
 
-					</ul>
-				</nav>
-			</div>
+  <!-- ============ FOOTER ============ -->
+  <footer class="foot">
+    <div class="wrap">
+      <h2>Got a place we <em>should</em> see next?</h2>
+      <div class="links">
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="https://vimeo.com/vzsolov" target="_blank" rel="noopener">Vimeo</a>
+        <a href="https://github.com/vzsolov/vzsolov.github.io" target="_blank" rel="noopener">Source</a>
+      </div>
+    </div>
+    <div class="wrap" style="margin-top:26px;">
+      <p class="fine">© <span id="yr"></span> VZsolov Trip Repo</p>
+    </div>
+  </footer>
 
-
-				<!-- gallery page 2024 -->
-				<div id="tm-gallery-page-2024" class="tm-gallery-page">
-					<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
-						<figure>
-							<a href="czechia24.html">
-							<img src="2024/czechia/images/image1.jpg" alt="Image" class="img-fluid tm-gallery-img" />
-							<figcaption>
-								<h4 class="tm-gallery-title">Czechia-2024</h4>
-								<p class="tm-gallery-description">
-										BLOG</a><br>
-										<a href="https://vimeo.com/manage/videos/962269643">VIMEO</a>
-								</p>
-							</figcaption>
-						</figure>
-					</article>
-
-					<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
-						<figure>
-							<a href="cyprus24.html">
-							<img src="2024/cyprus/images/image1.jpg" alt="Image" class="img-fluid tm-gallery-img" />
-							<figcaption>
-								<h4 class="tm-gallery-title">Cyprus-2024</h4>
-								<p class="tm-gallery-description">
-										BLOG</a><br>
-										<a href="https://vimeo.com/manage/videos/1011647508">VIMEO</a>
-								</p>
-							</figcaption>
-						</figure>
-					</article>
-
-					<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
-						<figure>
-							<a href="greece24.html">
-							<img src="2024/greece/images/image1.jpg" alt="Image" class="img-fluid tm-gallery-img" />
-							<figcaption>
-								<h4 class="tm-gallery-title">Greece-2024</h4>
-								<p class="tm-gallery-description">
-										BLOG</a><br>
-										<a href="https://vimeo.com/manage/videos/1030310873">VIMEO</a>
-								</p>
-							</figcaption>
-						</figure>
-					</article>
-
-
-				</div> 
-
-
-
-				<!-- gallery page 2023 -->
-				<div id="tm-gallery-page-2023" class="tm-gallery-page">
-					<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
-						<figure>
-							<a href="holland23.html">
-							<img src="2023/holland/images/image00.jpg" alt="Image" class="img-fluid tm-gallery-img" />
-							<figcaption>
-								<h4 class="tm-gallery-title">Holland-2023</h4>
-								<p class="tm-gallery-description">
-										BLOG</a><br>
-										<a href="https://vimeo.com/832892370">VIMEO</a>
-								</p>
-							</figcaption>
-						</figure>
-					</article>
-
-					<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
-						<figure>
-							<a href="corfu23.html">
-							<img src="2023/corfu/images/image1.jpg" alt="Image" class="img-fluid tm-gallery-img" />
-							<figcaption>
-								<h4 class="tm-gallery-title">Corfu-2023</h4>
-								<p class="tm-gallery-description">
-										BLOG</a><br>
-										<a href="https://vimeo.com/851624284">VIMEO</a>
-								</p>
-							</figcaption>
-						</figure>
-					</article>
-
-					<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
-						<figure>
-							<a href="romania23.html">
-							<img src="2023/romania/images/image1.jpg" alt="Image" class="img-fluid tm-gallery-img" />
-							<figcaption>
-								<h4 class="tm-gallery-title">Romania-2023</h4>
-								<p class="tm-gallery-description">
-										BLOG</a><br>
-										<a href="https://vimeo.com/888736331">VIMEO</a>
-								</p>
-							</figcaption>
-						</figure>
-					</article>
-
-
-				</div> 
-
-
-			
-
-
-
-				<!-- gallery page 2022 -->
-				<div id="tm-gallery-page-2022" class="tm-gallery-page">
-					<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
-						<figure>
-							<a href="austira22.html">
-							<img src="2022/austria/images/image00.jpg" alt="Image" class="img-fluid tm-gallery-img" />
-							<figcaption>
-								<h4 class="tm-gallery-title">Austria-2022</h4>
-								<p class="tm-gallery-description">
-										BLOG</a><br>
-										<a href="https://vimeo.com/721761838">VIMEO</a>
-								</p>
-							</figcaption>
-						</figure>
-					</article>
-					
-					<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
-						<figure>
-							<a href="iceland22.html">
-							<img src="2022/iceland/images/image00.jpg" alt="Image" class="img-fluid tm-gallery-img" />
-							<figcaption>
-								<h4 class="tm-gallery-title">Iceland-2022</h4>
-								<p class="tm-gallery-description">
-										BLOG</a><br>
-										<a href="https://vimeo.com/779704019?fbclid=IwAR2UAMhvg9mgVxNYdTPedy_vgxArDOrMdJv54KRUPyC1A8BgGFLGc8aaJmM">VIMEO</a>
-								</p>
-							</figcaption>
-						</figure>
-					</article>
-
-					
-
-				</div> 
-
-				<!-- gallery page 2021 -->
-				<div id="tm-gallery-page-2021" class="tm-gallery-page">
-						
-				</div> 
-				
-				<!-- gallery page 2020 -->
-				<div id="tm-gallery-page-2020" class="tm-gallery-page">
-					<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
-						<figure>
-							<a href="greece20.html">
-							<img src="2020/greece/images/image1.jpg" alt="Image" class="img-fluid tm-gallery-img" />
-							<figcaption>
-								<h4 class="tm-gallery-title">Greece-2020</h4>
-								<p class="tm-gallery-description">
-										BLOG</a><br>
-										<a href="https://vimeo.com/493867577">VIMEO</a>
-								</p>
-							</figcaption>
-						</figure>
-					</article>
-
-				</div> 
-
-				<!-- gallery page 2019 -->
-				<div id="tm-gallery-page-2019" class="tm-gallery-page">
-					<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
-						<figure>
-							<a href="france19.html">
-							<img src="2019/france/images/image1.jpg" alt="Image" class="img-fluid tm-gallery-img" />
-							<figcaption>
-								<h4 class="tm-gallery-title">Rhone Alps-2019</h4>
-								<p class="tm-gallery-description">
-									BLOG</a><br>
-									<a href="https://vimeo.com/341654092">VIMEO</a>
-								</p>
-							</figcaption>
-						</figure>
-					</article>
-
-					<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
-						<figure>
-							<a href="greece19.html">
-							<img src="2019/greece/images/image1.jpg" alt="Image" class="img-fluid tm-gallery-img" />
-							<figcaption>
-								<h4 class="tm-gallery-title">Greece-2019</h4>
-								<p class="tm-gallery-description">
-									BLOG</a><br>
-									<a href="https://vimeo.com/380936248">VIMEO</a>
-								</p>
-							</figcaption>
-						</figure>
-					</article>
-				</div> 
-
-				<!-- gallery page 2018 -->
-				<div id="tm-gallery-page-2018" class="tm-gallery-page">
-
-					<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
-						<figure>
-							<a href="austira18.html">
-							<img src="2018/austria/images/image1.jpg" alt="Image" class="img-fluid tm-gallery-img" />
-							<figcaption>
-								<h4 class="tm-gallery-title">Austria-2018</h4>
-								<p class="tm-gallery-description">
-									BLOG</a><br>
-									<a href="https://vimeo.com/269239501">VIMEO</a>
-								</p>
-							</figcaption>
-						</figure>
-					</article>
-
-					<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
-						<figure>
-							<a href="montenegro18.html">
-							<img src="2018/montenegro/images/image1.jpg" alt="Image" class="img-fluid tm-gallery-img" />
-							<figcaption>
-								<h4 class="tm-gallery-title">Montenegro-2018</h4>
-								<p class="tm-gallery-description">
-									BLOG</a><br>
-									<a href="https://vimeo.com/295442862">VIMEO</a>
-								</p>
-							</figcaption>
-						</figure>
-					</article>
-				</div> 
-
-				<!-- gallery page 2017 -->
-				<div id="tm-gallery-page-2017" class="tm-gallery-page">
-					<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
-						<figure>
-							<a href="greece17.html">
-							<img src="2017/greece/images/image1.jpg" alt="Image" class="img-fluid tm-gallery-img" />
-							<figcaption>
-								<h4 class="tm-gallery-title">Crete-2017</h4>
-								<p class="tm-gallery-description">
-									BLOG</a><br>
-									<a href="https://vimeo.com/229401853">VIMEO</a>
-								</p>
-							</figcaption>
-						</figure>
-					</article>
-
-					<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
-						<figure>
-							<a href="lapland17.html">
-							<img src="2017/lapland/images/image2.jpg" alt="Image" class="img-fluid tm-gallery-img" />
-							<figcaption>
-								<h4 class="tm-gallery-title">Lapland-2017</h4>
-								<p class="tm-gallery-description">
-									BLOG</a><br>
-									<a href="https://vimeo.com/208193648">VIMEO</a>
-								</p>
-							</figcaption>
-						</figure>
-					</article>
-				</div> 
-				
-				<!-- gallery page 2016 -->
-				<div id="tm-gallery-page-2016" class="tm-gallery-page">
-					<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
-						<figure>
-							<a href="thailand16.html">
-							<img src="2016/thailand/images/image1.jpg" alt="Image" class="img-fluid tm-gallery-img" />
-							<figcaption>
-								<h4 class="tm-gallery-title">thailand-2016</h4>
-								<p class="tm-gallery-description">
-									BLOG</a><br>
-									<a href="https://vimeo.com/192307301">VIMEO</a>
-								</p>
-							</figcaption>
-						</figure>
-					</article>
-				</div> 
-
-				<!-- gallery page 2015 -->
-				<div id="tm-gallery-page-2015" class="tm-gallery-page">
-
-		
-					<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
-						<figure>
-							<a href="georgia15.html">
-							<img src="2015/georgia/images/image1.jpg" alt="Image" class="img-fluid tm-gallery-img" />
-							<figcaption>
-								<h4 class="tm-gallery-title">Georgia-2015</h4>
-								<p class="tm-gallery-description">
-									BLOG</a><br>
-									<a href="https://vimeo.com/218836340">VIMEO Nature</a>
-									<a href="https://vimeo.com/180413605">VIMEO Follow Me</a>
-								</p>
-							</figcaption>
-						</figure>
-					</article>
-
-
-				</div> 
-
-
-
-
-				<!-- gallery page 2014 -->
-				<div id="tm-gallery-page-2014" class="tm-gallery-page">
-					<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
-						<figure>
-							<a href="iceland14.html">
-							<img src="2014/iceland/images/image1.jpg" alt="Image" class="img-fluid tm-gallery-img" />
-							<figcaption>
-								<h4 class="tm-gallery-title">Iceland-2014</h4>
-								<p class="tm-gallery-description">
-									BLOG</a><br>
-									<a href="https://vimeo.com/196623783">VIMEO Nature</a>
-									<a href="https://vimeo.com/102657979">VIMEO 360</a> 
-								</p>
-							</figcaption>
-						</figure>
-					</article>
-				</div> 
-				
-				<!-- gallery page 2013 -->
-				<div id="tm-gallery-page-2013" class="tm-gallery-page">
-					
-					<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
-						<figure>
-							<a href="norway13.html">
-							<img src="2013/norway/images/image1.jpg" alt="Image" class="img-fluid tm-gallery-img" />
-							<figcaption>
-								<h4 class="tm-gallery-title">Norway-2013</h4>
-								<p class="tm-gallery-description">
-									BLOG</a><br>
-									<a href="https://vimeo.com/200458098">VIMEO</a>
-								</p>
-							</figcaption>
-						</figure>
-					</article>	
-
-				</div> 
-				
-				<!-- gallery page 2012 -->
-				<div id="tm-gallery-page-2012" class="tm-gallery-page">
-					<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
-						<figure>
-							<a href="ireland12.html">
-							<img src="2012/ireland/images/image1.jpg" alt="Image" class="img-fluid tm-gallery-img" />
-							<figcaption>
-								<h4 class="tm-gallery-title">Ireland-2012</h4>
-								<p class="tm-gallery-description">
-									BLOG</a><br>
-									<a href="https://vimeo.com/199864810">VIMEO</a>
-								</p>
-							</figcaption>
-						</figure>
-					</article>
-
-					<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
-						<figure>
-							<a href="praga12.html">
-							<img src="2012/praga/images/image1.jpg" alt="Image" class="img-fluid tm-gallery-img" />
-							<figcaption>
-								<h4 class="tm-gallery-title">Prague-2012</h4>
-								<p class="tm-gallery-description">
-									BLOG</a><br>
-									
-								</p>
-							</figcaption>
-						</figure>
-					</article>
-
-					
-				</div> 
-				
-
-
-			</div>
-
-			
-		</main>
-
-		<footer class="tm-footer text-center">
-			<p>Copyright &copy; 2020 Simple House
-
-            | Design: <a rel="nofollow" href="https://templatemo.com">TemplateMo</a></p>
-		</footer>
-	</div>
-	<script src="js/jquery.min.js"></script>
-	<script src="js/parallax.min.js"></script>
-	<script>
-		$(document).ready(function(){
-			// Handle click on paging links
-			$('.tm-paging-link').click(function(e){
-				e.preventDefault();
-
-				var page = $(this).text().toLowerCase();
-				$('.tm-gallery-page').addClass('hidden');
-				$('#tm-gallery-page-' + page).removeClass('hidden');
-				$('.tm-paging-link').removeClass('active');
-				$(this).addClass("active");
-			});
-		});
-	</script>
+  <script src="assets/trips.js"></script>
+  <script src="assets/home.js"></script>
+  <script>document.getElementById("yr").textContent = new Date().getFullYear();</script>
 </body>
 </html>
