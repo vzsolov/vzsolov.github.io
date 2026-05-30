@@ -3,6 +3,9 @@
 const BASE = "";
 
 const TRIPS = [
+  { year: 2025, title: "Slovakia",   country: "Slovakia",    region: "The Tatras",     page: "slovakia25.html",  img: "2025/slovakia/images/image1.jpg",  links: [{ label: "Film", url: "https://vimeo.com/manage/videos/1121544313" }], journal: "2025/slovakia/slovakia25.html" },
+  { year: 2025, title: "Italy",      country: "Italy",       region: "Northern Italy", page: "italy25.html",     img: "2025/italy/images/image1.jpg",     links: [{ label: "Film", url: "https://vimeo.com/manage/videos/1089313719" }], journal: "2025/italy/italy25.html" },
+
   { year: 2024, title: "Czechia",    country: "Czechia",     region: "Central Europe", page: "czechia24.html",   img: "2024/czechia/images/image1.jpg",   links: [{ label: "Film", url: "https://vimeo.com/manage/videos/962269643" }],  journal: "2024/czechia/czechia24.html" },
   { year: 2024, title: "Cyprus",     country: "Cyprus",      region: "Mediterranean",  page: "cyprus24.html",    img: "2024/cyprus/images/image1.jpg",    links: [{ label: "Film", url: "https://vimeo.com/manage/videos/1011647508" }], journal: "2024/cyprus/cyprus24.html" },
   { year: 2024, title: "Greece",     country: "Greece",      region: "Mediterranean",  page: "greece24.html",    img: "2024/greece/images/image1.jpg",    links: [{ label: "Film", url: "https://vimeo.com/manage/videos/1030310873" }], journal: "2024/greece/greece24.html" },
@@ -63,4 +66,6 @@ const PLACES = [
   { country: "Cyprus",      lat: 35.0,  lon: 33.2  },
   { country: "Georgia",     lat: 42.2,  lon: 43.4  },
   { country: "Thailand",    lat: 15.0,  lon: 101.0 },
+  { country: "Italy",       lat: 46.4,  lon: 11.3  },
+  { country: "Slovakia",    lat: 49.0,  lon: 19.6  },
 ];
